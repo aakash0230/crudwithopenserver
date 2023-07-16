@@ -10,7 +10,7 @@ import { useState } from "react"
 
 const Layout = () =>{
 
-    const [form, setForm] = useState("")
+    const [form, setForm] = useState("Task List")
     const Currdata = {
         fname: "",
         lname : "",

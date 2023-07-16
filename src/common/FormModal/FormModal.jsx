@@ -1,17 +1,8 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from '../Form/Form';
 
 export default function FormModal({formData, setFormData, finalFormData, setFinalFormData, show, setShow, handleClose, handleShow}) {
-    const Currdata = {
-        fname: "",
-        lname : "",
-        priority : "",
-        city : "",
-        task : "",
-        index : -1
-      }
 
   return (
     <>
@@ -106,12 +97,12 @@ export default function FormModal({formData, setFormData, finalFormData, setFina
             <Form formData = {formData} setFormData = {setFormData} finalFormData = {finalFormData} setFinalFormData = {setFinalFormData} handleClose = {handleClose} handleShow = {handleShow}/>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        {/* <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
         <Button variant="primary" onClick={handleClose}>
           Save Changes
-        </Button>
+        </Button> */}
       </Modal.Footer>
     </Modal>
   </>

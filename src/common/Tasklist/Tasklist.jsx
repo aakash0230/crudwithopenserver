@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import DataTable from "react-data-table-component"
 import FormModal from '../FormModal/FormModal'
 import { useState } from 'react'
-import { getData, putData } from '../../apiCalls';
+import { getData, deleteRequest } from '../../apiCalls';
 
 export default function Tasklist({formData, setFormData, finalFormData, setFinalFormData}) {
     const [show, setShow] = useState(false);
@@ -13,28 +13,19 @@ export default function Tasklist({formData, setFormData, finalFormData, setFinal
         getData(setFinalFormData);
     },[]);
 
-    const deleteData = (index) => {
-        // console.log("deleteData")
-        // let tempData = finalFormData[index]
-        // let nList = finalFormData.filter((val) => val.index != tempData.index)
-        // nList = nList.map((val, ind) => {val.index = ind; return val})
-        // setFinalFormData(nList)
-
+    const deleteData = async (id) => {
+        
+        let data = await deleteRequest(id)
+        console.log("inside delete data function", data)
+        getData(setFinalFormData)
     }
     const editData = async (id) => {
         console.log("editData")
         let tempData = finalFormData.filter((task) => task.id === id)
-        console.log(tempData[0])
         setFormData(tempData[0])
-        // console.log(index)
-        // setFormData(finalFormData[index])
-        const data = await putData(formData, setFormData, id)
-        // console.log(data)
-        // getData(setFinalFormData)
+        console.log("setting form", tempData[0])
         handleShow()
     }
-
-    console.log(formData)
 
 
     const Currdata = {

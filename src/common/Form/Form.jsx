@@ -1,33 +1,16 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import axios from "axios";
-import { getData, postData } from '../../apiCalls';
+import React from 'react'
+import { getData, postAndPut } from '../../apiCalls';
 
 export default function Form({formData, setFormData, finalFormData, setFinalFormData, handleClose, handleShow}) {
-    const Currdata = {
-        fname: "",
-        lname : "",
-        priority : "",
-        city : "",
-        task : "",
-      }
 
-    // useEffect(( => {
-    //     getData
-    // }))
     const changeData = (e, ele) => {
-        // console.log(e.target.name)
         setFormData({...formData,[ele] : e.target.value})
     }
 
     const onSubmitFormButton = async () => {
-        console.log("onsubmit button clicked")
-        //let data= await getData(setFinalFormData);  // function for getting the data
-        let data = await postData(formData, setFormData)
-        console.log(data)
+        await postAndPut(formData, setFormData)
         getData(setFinalFormData)
-        
-        
+        handleClose()
     }
 
   return (
@@ -51,19 +34,19 @@ export default function Form({formData, setFormData, finalFormData, setFinalForm
                     <div className="col-4">
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control" id="floatingInput" value={formData.fname} placeholder="name@example.com" name='fname' onChange={(e) => {changeData(e, 'fname')}}/>
-                            <label htmlhtmlFor="floatingInput"> First Name</label>
+                            <label htmlFor="floatingInput"> First Name</label>
                         </div>
                     </div>
                 <div className="col-4">
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-                        <label htmlhtmlFor="floatingInput">Middle Name</label>
+                        <label htmlFor="floatingInput">Middle Name</label>
                     </div>
                 </div>
                 <div className="col-4">
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" id="floatingPassword" value={formData.lname} placeholder="Password" onChange={(e) => {changeData(e, 'lname')}}/>
-                        <label htmlhtmlFor="floatingPassword">Last Name</label>
+                        <label htmlFor="floatingPassword">Last Name</label>
                     </div>
                 </div>
                 </div>
@@ -71,13 +54,13 @@ export default function Form({formData, setFormData, finalFormData, setFinalForm
                     <div className="col-6">
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-                            <label htmlhtmlFor="floatingInput"> Phone</label>
+                            <label htmlFor="floatingInput"> Phone</label>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="form-floating mb-3">
                             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-                            <label htmlhtmlFor="floatingInput">Email</label>
+                            <label htmlFor="floatingInput">Email</label>
                         </div>
                     </div>
                 </div>
@@ -85,18 +68,19 @@ export default function Form({formData, setFormData, finalFormData, setFinalForm
                     <div className="col-6">
                         <div className="form-floating mb-3">
                             <select className="form-select" id="floatingSelectGrid" aria-label="Floating label select example" onChange={(e) => {changeData(e, 'city')}}>
+                                <option selected>Open this select menu</option>
                                 <option value="Mumbai">Mumbai</option>
                                 <option value="Pune">Pune</option>
                                 <option value="Nashik">Nashik</option>
                                 <option value="Thane">Thane</option>
                             </select>
-                            <label htmlhtmlFor="floatingSelectGrid">City</label>
+                            <label htmlFor="floatingSelectGrid">City</label>
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="form-floating mb-3">
                         <input type="text" className="form-control" id="floatingInputGrid" placeholder="name@example.com" />
-                        <label htmlhtmlFor="floatingInputGrid">Pincode</label>
+                        <label htmlFor="floatingInputGrid">Pincode</label>
                         </div>
                     </div>   
                 </div>
